@@ -17,8 +17,7 @@ class RequirePermission
     public function handle(Request $request, Closure $next, $feature_name, $permission_name): Response
     {
 
-        $feature = Feature::where('name', $feature_name)->first();
-        if (auth('web')->check() && auth('web')->user()->hasPermission($feature->id, $permission_name)) {
+        if (auth('web')->check() && auth('web')->user()->hasPermission($feature_name, $permission_name)) {
             return $next($request);
         }
         abort(404);

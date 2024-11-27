@@ -29,24 +29,15 @@ class UserCreateForm extends Form
             'address' => 'required|string',
             'phone' => 'required|string',
             'gender' => 'required|boolean',
-            'role_id' => 'required|integer|exists:roles,id'
+            'role_id' => 'required|integer|exists:roles,id',
+            'is_active' => 'nullable|boolean'
         ];
     }
 
     public function submit()
     {
-        $this->validate();
-        User::create([
-            'name' => $this->name,
-            'username' => $this->username,
-            'email' => $this->email,
-            'password' => $this->password,
-            'address' => $this->address,
-            'phone' => $this->phone,
-            'gender' => $this->gender,
-            'is_active' => $this->is_active,
-            'role_id' => $this->role_id,
-        ]);
+        $data = $this->validate();
+        User::create($data);
         session()->flash('success', 'User Created Successfully');
     }
 }

@@ -16,7 +16,8 @@ class UserIndex extends Component
         return view('livewire.features.users.user-index',
     [
         'users' => User::whereNot('id', 1)->paginate(10),
-        'feature' => Feature::where('name', 'users')->first()
+        'feature' => Feature::where('name', 'users')
+        ->first()
 
     ]);
     }

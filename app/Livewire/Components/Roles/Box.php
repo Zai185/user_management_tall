@@ -11,7 +11,7 @@ class Box extends Component
     #[Modelable()]
     public $permissions;
     public $feature;
-    public $all = false;
+    public $all = true;
 
     public function togglePermissions()
     {
@@ -33,7 +33,7 @@ class Box extends Component
     public function mount()
     {
         $permissions_id = $this->feature->permissions->pluck('id')->toArray();
-        $diff = array_diff($permissions_id, $this->permissions);
+        $diff = array_diff($permissions_id, $this->permissions ?? []);
         $this->all = !(bool)$diff;
     }
 

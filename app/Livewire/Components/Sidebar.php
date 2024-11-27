@@ -20,7 +20,7 @@ class Sidebar extends Component
         return view(
             'livewire.components.sidebar',
             [
-                'features' => Feature::all()
+                'features' => Feature::all()->pluck('name')->toArray()
             ]
         );
     }

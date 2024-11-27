@@ -49,7 +49,7 @@ class UserEditForm extends Form
 
     public function submit(User $user)
     {
-        $validated_user = $this->validate($this->rules($user));
+        $validated_user = $this->validate($this->rules($user)); 
         if(!$validated_user['password']) {
             $validated_user['password'] = Hash::make($user->password);
         }
