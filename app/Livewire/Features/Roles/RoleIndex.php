@@ -13,11 +13,11 @@ use Livewire\WithPagination;
 class RoleIndex extends Component
 {
 
-    #[On('update_role')]
     public function delete($role_id)
     {
         Role::findOrFail($role_id)->delete();
     }
+    #[On('update_role')]
     public function render()
     {
         return view(

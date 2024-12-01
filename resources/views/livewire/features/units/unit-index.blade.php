@@ -4,7 +4,7 @@
     <p class="text-lg">Unit List</p>
 
     @if (auth('web')->user()->hasPermission("units", 'create'))
-    <a href="{{route('units.create')}}" wire:navigate class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
+    <a href="{{route('units.create')}}"  class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
         Create Unit
     </a>
     @endif
@@ -45,7 +45,7 @@
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("units", 'edit' ))
                         <a href="{{route('units.edit', ['unit'=> $unit->id])}}"
-                            wire:navigate class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif

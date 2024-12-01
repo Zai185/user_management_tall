@@ -11,16 +11,15 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <tallstackui:script /> 
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
 
-    <div class="flex ">
+    <div class="flex " x-data="{isModelOpen : false}">
         <livewire:components.sidebar />
-        <div class="flex-1 h-screen overflow-y-auto">
+        <div class="bg-gray-50 flex-1 h-screen overflow-y-auto" @click="isModelOpen=false">
             {{$slot}}
         </div>
     </div>

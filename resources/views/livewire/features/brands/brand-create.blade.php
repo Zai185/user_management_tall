@@ -14,6 +14,6 @@
                 @enderror
             </div>
         </div>
-        <button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</button>
+        <x-button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</x-button>
     </div>
 </form>

@@ -29,4 +29,8 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function product_media(){
+        return $this->hasMany(ProductMedia::class);
+    }
 }

@@ -7,51 +7,34 @@
             <div class="grid grid-cols-2 gap-4 w-2/3">
                 <div class="w-full">
                     <label class="text-sm font-medium block">Name:</label>
-                    <input type="text" placeholder="@name" wire:model="form.name" name="name" class="border w-full py-2 px-4" required>
+                    <x-input placeholder="Role Name" wire:model="form.name" required />
+                    <x-input-error error="form.name" />
                 </div>
-                @error('form.name')
-                <x-input-error :$message />
-                @enderror
                 <div class="w-full">
                     <label class="text-sm font-medium block">SKU:</label>
-                    <input type="text" placeholder="@SKU" wire:model="form.SKU" name="SKU" class="border w-full py-2 px-4" required>
+                    <x-input placeholder="Role Name" wire:model="form.SKU" required min="8" max="12" />
+                    <x-input-error error="form.SKU" />
                 </div>
-                @error('form.SKU')
-                <x-input-error :$message />
-                @enderror
                 <div class="w-full col-span-2">
                     <label class="text-sm font-medium block ">Description:</label>
                     <textarea type="text" placeholder="@description" wire:model="form.description" name="description" class="border w-full py-2 px-4" required></textarea>
+                    <x-input-error error="form.description" />
                 </div>
-                @error('form.description')
-                <x-input-error :$message />
-                @enderror
             </div>
 
             <div class="grid grid-cols-3 gap-4 w-2/3">
                 <div class="w-full">
                     <label class="text-sm font-medium block">Purchased Price:</label>
-                    <input type="number" placeholder="@purchased_price" wire:model="form.purchased_price" name="purchased_price" class="border w-full py-2 px-4" required>
+                    <x-input
+                        type="number" placeholder="Role Name" wire:model="form.purchased_price" required />
+                    <x-input-error error="form.purchased_price" />
                 </div>
-                @error('form.purchased_price')
-                <x-input-error :$message />
-                @enderror
 
                 <div class="w-full">
                     <label class="text-sm font-medium block">Sale Price:</label>
-                    <input type="number" placeholder="@sale_price" wire:model="form.sale_price" name="sale_price" class="border w-full py-2 px-4" required>
+                    <x-input type="number" placeholder="Role Name" wire:model="form.sale_price" required />
+                    <x-input-error error="form.sale_price" />
                 </div>
-                @error('form.sale_price')
-                <x-input-error :$message />
-                @enderror
-                
-                <div class="w-full col-span-2">
-                    <label class="text-sm font-medium block ">Description:</label>
-                    <textarea type="text" placeholder="@description" wire:model="form.description" name="description" class="border w-full py-2 px-4" required></textarea>
-                </div>
-                @error('form.description')
-                <x-input-error :$message />
-                @enderror
             </div>
 
             <div class="grid grid-cols-3 gap-4 w-2/3">
@@ -65,10 +48,9 @@
                         </option>
                         @endforeach
                     </select>
-                    @error('form.category_id')
-                    <x-input-error :$message />
-                    @enderror
+                    <x-input-error error="category_id" />
                 </div>
+
                 <div class="w-full">
                     <label class="text-sm font-medium block">Brand:</label>
                     <select wire:model="form.brand_id" name="brand_id" class="w-full border py-2 px-4" required>
@@ -79,10 +61,9 @@
                         </option>
                         @endforeach
                     </select>
-                    @error('form.brand_id')
-                    <x-input-error :$message />
-                    @enderror
+                    <x-input-error error="form.brand_id" />
                 </div>
+
                 <div class="w-full">
                     <label class="text-sm font-medium block">Unit:</label>
                     <select wire:model="form.unit_id" name="unit_id" class="w-full border py-2 px-4" required>
@@ -93,18 +74,40 @@
                         </option>
                         @endforeach
                     </select>
-                    @error('form.unit_id')
-                    <x-input-error :$message />
-                    @enderror
+                    <x-input-error error="form.unit_id" />
                 </div>
+
             </div>
         </div>
 
-        <input type="checkbox" wire:model="form.is_active" name="is_active">
+        <x-checkbox wire:model="form.is_active" name="is_active" />
         <label>Is Active</label>
-        @error('form.gender')
-        <x-input-error :message="$message" />
-        @enderror
+        <x-input-error error="form.gender" />
     </div>
-    <button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</button>
+    <input
+        type="file"
+        multiple
+        accept="image/*"
+        wire:model="form.images"
+        class="block w-full mb-4" />
+
+    <div id="img-box" class="flex gap-1"></div>
+    <p>Photo Preview:</p>
+    <x-icons.spinner wire:loading wire:target='form.images'></x-icons.spinner>
+    @if ($form->images)
+
+    <div class="mb-4 flex gap-1">
+        @foreach ($form->images as $index => $image)
+        <div class="size-32 relative">
+            <img src="{{ $image->temporaryUrl() }}" alt="Preview" class="w-full h-full border border-gray-800 rounded">
+            <span wire:click="deleteImage({{$index}})" class="absolute text-white bg-red-700 cursor-pointer hover:bg-red-800 border top-0 right-0 translate-x-1/2 rounded-lg p-1 -translate-y-1/2 [&>svg]:h-4 [&>svg]:w-4">
+                <x-icons.trash />
+            </span>
+        </div>
+        @endforeach
+    </div>
+
+    @endif
+
+    <x-button type="submit">submit</x-button>
 </form>

@@ -8,15 +8,22 @@ use App\Models\Category;
 use App\Models\Role;
 use App\Models\Unit;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ProductCreate extends Component
 {
 
+    use WithFileUploads;
     public ProductCreateForm $form;
     public function create()
     {
         $this->form->submit();
         $this->redirectRoute('products.index', navigate: true);
+    }
+
+    public function deleteImage($index)
+    {
+        unset($this->form->images[$index]);
     }
 
     public function render()

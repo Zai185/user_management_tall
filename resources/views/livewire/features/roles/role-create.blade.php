@@ -1,16 +1,13 @@
 <form class="p-4 flex-1" wire:submit="store">
     @csrf
-    <h2 class="text-2xl font-medium">Roles</h2>
-    <p class="text-lg">Role Create</p>
-
+    <h2>Roles</h2>
+    <h6>Role Create</h6>
     <div>
-        <input type="text" placeholder="Role Name" wire:model="form.role">
-        @error('form.role')
-        <x-input-error :$message />
-        @enderror
+        <x-input placeholder="Role Name" wire:model="form.role" class="!w-56" required/>
+        <x-input-error error="form.role" />
     </div>
 
-    <h3 class="my-1 font-medium">Select Permission</h3>
+    <h6 class="my-1">Select Permission</h6>
     <div class="border">
         @foreach ($features as $feature)
         <livewire:components.roles.box
@@ -18,10 +15,8 @@
             :$feature
             wire:model="form.permissions" />
         @endforeach
-        @error('form.permissions')
-        <x-input-error :$message />
-        @enderror
+        <x-input-error error="form.permissions" />
     </div>
 
-    <button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</button>
+    <x-button>submit</x-button>
 </form>

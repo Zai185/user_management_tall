@@ -21,6 +21,21 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                primary: '#3895d3',
+                'primary-hover': '#3895f3',
+                'primary-text': '#eee'
+            },
+            fontSize:{
+                sm: '12px',
+                base : '14px',
+                md: '17px',
+                lg: '20px',
+                xl: '24px',
+                '2xl' : '29px',
+                '3xl' : '35px',
+                '4xl' : '42px'
+            }
         },
     },
     plugins: [forms],

@@ -10,4 +10,9 @@ class ProductMedia extends Model
         'img_path',
         'product_id'
     ];
+
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }

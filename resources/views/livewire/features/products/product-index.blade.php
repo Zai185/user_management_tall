@@ -4,9 +4,9 @@
     <p class="text-lg">Product List</p>
 
     @if (auth('web')->user()->hasPermission("products", 'create'))
-    <a href="{{route('products.create')}}" wire:navigate class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
+    <x-button-link href="{{route('products.create')}}" >
         Create Product
-    </a>
+    </x-button-link>
     @endif
     @if($products->count())
     <div>
@@ -89,7 +89,7 @@
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("products", 'edit' ))
                         <a href="{{route('products.edit', ['product'=> $product->id])}}"
-                            wire:navigate class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif

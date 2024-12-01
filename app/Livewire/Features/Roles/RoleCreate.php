@@ -5,6 +5,7 @@ namespace App\Livewire\Features\Roles;
 use App\Livewire\Forms\RoleCreateForm;
 use App\Models\Feature;
 use App\Models\Role;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -18,6 +19,7 @@ class RoleCreate extends Component
         $this->redirectRoute('roles.index', navigate:true);
     }
 
+    #[On('update_role')]
     public function render()
     {
         return view(

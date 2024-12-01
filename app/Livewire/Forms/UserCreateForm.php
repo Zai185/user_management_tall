@@ -17,7 +17,7 @@ class UserCreateForm extends Form
     public $phone;
     public $gender;
     public $is_active;
-    public $role_id;
+    public $role_id = '';
 
     public function rules()
     {
@@ -30,13 +30,13 @@ class UserCreateForm extends Form
             'phone' => 'required|string',
             'gender' => 'required|boolean',
             'role_id' => 'required|integer|exists:roles,id',
-            'is_active' => 'nullable|boolean'
         ];
     }
 
     public function submit()
     {
         $data = $this->validate();
+        if ($this->is_active) $data['is_active'] = $this->is_active;
         User::create($data);
         session()->flash('success', 'User Created Successfully');
     }

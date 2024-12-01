@@ -9,28 +9,27 @@
                     <legend>Personal Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Name:</label>
-                        <input type="text" placeholder="Name" wire:model="form.name" name="name" class="border w-full py-2 px-4" required>
-                        @error('form.name')
-                        <x-input-error :$message />
-                        @enderror
+                        <x-input placeholder="e.g. John" wire:model="form.name" required />
+                        <x-input-error error="form.name" />
                     </div>
 
                     <div>
                         <label class="text-sm font-medium block">Username:</label>
-                        <input type="text" placeholder="@username" wire:model="form.username" name="username" class="border w-full py-2 px-4" required>
+                        <x-input placeholder="e.g. @john" wire:model="form.username" required />
+                        <x-input-error error="form.username" />
                     </div>
 
                     <div>
                         <label class="text-sm font-medium block">Phone:</label>
-                        <input type="text" placeholder="+123456789" wire:model="form.phone" name="phone" class="border w-full py-2 px-4" required>
+                        <x-input placeholder="+94943234234" wire:model="form.phone" required />
+                        <x-input-error error="form.phone" />
                     </div>
 
                     <div>
                         <label class="text-sm font-medium block">Address:</label>
-                        <input type="text" placeholder="No.2, John San st." wire:model="form.address" name="address" class="w-full border py-2 px-4 " required>
-                        @error('form.address')
-                        <x-input-error :$message />
-                        @enderror
+                        <x-input placeholder="e.g. Yangon, Myanmar" wire:model="form.address" required />
+                        <x-input-error error="form.address" />
+
                     </div>
 
                 </fieldset>
@@ -38,18 +37,15 @@
                     <legend>Account Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Email:</label>
-                        <input type="email" placeholder="user@example.com" wire:model="form.email" name="email" class="w-full border py-2 px-4" required>
-                        @error('form.email')
-                        <x-input-error :$message />
-                        @enderror
+                        <x-input placeholder="john@example.com" wire:model="form.email" required />
+                        <x-input-error error="form.email" />
                     </div>
 
                     <div>
                         <label class="text-sm font-medium block">Password:</label>
-                        <input type="password" placeholder="********" wire:model="form.password" name="password" class="w-full border py-2 px-4">
-                        @error('form.password')
-                        <x-input-error :$message />
-                        @enderror
+                        <x-input placeholder="********" wire:model="form.password" required />
+                        <x-input-error error="form.password" />
+
                     </div>
 
                     <div>
@@ -62,9 +58,8 @@
                             </option>
                             @endforeach
                         </select>
-                        @error('form.role_id')
-                        <x-input-error :$message />
-                        @enderror
+                        <x-input-error error="form.role_id" />
+
                     </div>
 
                 </fieldset>
@@ -83,5 +78,5 @@
         <input type="checkbox" wire:model="form.is_active" name="is_active" {{$form->is_active ? 'checked' : ''}}>
         <label>Is Active</label>
     </div>
-    <button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</button>
+    <x-button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</x-button>
 </form>

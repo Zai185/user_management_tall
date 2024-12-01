@@ -1,12 +1,9 @@
 <div x-data="{modalOpen : false, user_id: null, user_name :''}"
-    class="relative  w-full h-full overflow-y-auto  text-gray-700 bg-white shadow-md rounded-xl bg-clip-border p-4">
-    <h2 class="text-2xl font-medium">Users</h2>
-    <p class="text-lg">User List</p>
+    class="relative  w-full h-full overflow-y-auto  text-gray-700 shadow-md rounded-xl bg-clip-border p-4">
+    <h4>User List</h4>
 
     @if (auth('web')->user()->hasPermission("units", 'create'))
-    <a href="{{route('users.create')}}" wire:navigate class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
-        Create User
-    </a>
+    <x-button-link href="{{route('users.create')}}" class="">Create User</x-button-link>
     @endif
     @if($users->count())
     <div>
@@ -56,7 +53,7 @@
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("units", 'edit' ))
                         <a href="{{route('users.edit', ['user'=> $user->id])}}"
-                            wire:navigate class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif

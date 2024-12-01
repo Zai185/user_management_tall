@@ -4,7 +4,7 @@
     <p class="text-lg">Category List</p>
 
     @if (auth('web')->user()->hasPermission("categories", 'create'))
-    <a href="{{route('categories.create')}}" wire:navigate class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
+    <a href="{{route('categories.create')}}"  class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
         Create Category
     </a>
     @endif
@@ -56,7 +56,7 @@
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("categories", 'edit' ))
                         <a href="{{route('categories.edit', ['category'=> $category->id])}}"
-                            wire:navigate class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif

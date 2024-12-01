@@ -1,23 +1,23 @@
 <form class="p-4 flex-1" wire:submit="save">
     @csrf
-    <h1>Roles</h1>
+    <h2>Roles</h2>
 
-    <div>
-        <input type="text" placeholder="Role Name" wire:model="form.role">
-        @error('form.role')
-        <x-input-error :$message />
-        @enderror
-    
+    <div class="flex items-center gap-4">
+        <label>Role name:</label>
+        <x-input  placeholder="Role Name" wire:model="form.role" required />
     </div>
+    <x-input-error error="form.role" />
 
-    <div>
+    <div class="odd:bg-blue-500">
         @foreach ($features as $feature)
-        <livewire:components.roles.box :key="$feature->id" :$feature wire:model="form.permissions" />
+        <livewire:components.roles.box
+            :key="$feature->id"
+            :$feature
+            
+            wire:model="form.permissions" />
         @endforeach
-        @error('form.permissions')
-        <x-input-error :$message />
-        @enderror
+        <x-input-error error="form.permissions" />
     </div>
 
-    <button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</button>
+    <x-button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</x-button>
 </form>

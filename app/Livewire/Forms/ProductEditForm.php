@@ -18,6 +18,7 @@ class ProductEditForm extends Form
     public $brand_id;
     public $unit_id;
     public $is_active;
+    public $images;
 
     public function mount(Product $product)
     {
@@ -31,6 +32,12 @@ class ProductEditForm extends Form
         $this->brand_id = $product->brand_id;
         $this->unit_id = $product->unit_id;
         $this->is_active = $product->is_active;
+        if ($product->product_media->count()) {
+            $this->images = $product->product_media->map(function ($pm) {
+                $pm['img_path'] = asset('storage/'.$pm->img_path);
+                return $pm;
+            });
+        }
     }
     public function rules(Product $product)
     {

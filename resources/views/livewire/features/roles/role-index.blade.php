@@ -1,13 +1,14 @@
 <div x-data="{modalOpen : false, role_id: null, role_name :''}"
     class="relative  w-full h-full overflow-y-auto  text-gray-700 bg-white shadow-md rounded-xl bg-clip-border p-4">
-    <h2 class="text-2xl font-medium">Roles</h2>
-    <p class="text-lg">Role List</p>
+    <h4>Role List</h4>
 
     @if (auth('web')->user()->hasPermission("roles", 'create'))
 
-    <a href="{{route('roles.create')}}" wire:navigate class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
-        Create Role
-    </a>
+    <x-button>
+        <a href="{{route('roles.create')}}" >
+            Create Role
+        </a>
+    </x-button>
 
     @endif
 
@@ -47,7 +48,7 @@
                 </td>
                 <td class="p-4 border-b border-blue-gray-50 w-48">
                     @if (auth('web')->user()->hasPermission("roles", 'edit' ))
-                    <a href="{{route('roles.edit', ['role'=> $role->id])}}" wire:navigate class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                    <a href="{{route('roles.edit', ['role'=> $role->id])}}"  class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                         Edit
                     </a>
                     @endif
