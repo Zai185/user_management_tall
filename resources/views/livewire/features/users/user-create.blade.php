@@ -5,7 +5,7 @@
         <p class="text-lg">Create User</p>
         <div>
             <div class="grid grid-cols-2 gap-4">
-                <fieldset class=" space-y-2 w-full border border-gray-800 px-2 mb-4 pb-2">
+                <fieldset class=" space-y-2 w-full border-gray-300 px-2 mb-4 pb-2">
                     <legend>Personal Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Name:</label>
@@ -33,11 +33,11 @@
                     </div>
 
                 </fieldset>
-                <fieldset class="space-y-2 w-full border border-gray-800 px-2 pb-2 mb-4">
+                <fieldset class=" space-y-2 w-full border-gray-300 px-2 mb-4 pb-2">
                     <legend>Account Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Email:</label>
-                        <x-input placeholder="john@example.com" wire:model="form.email" required />
+                        <x-input placeholder="john@example.com" type="email" wire:model="form.email" required />
                         <x-input-error error="form.email" />
                     </div>
 
@@ -50,7 +50,7 @@
 
                     <div>
                         <label class="text-sm font-medium block">Role:</label>
-                        <select wire:model="form.role_id" name="role_id" class="w-full border py-2 px-4" required>
+                        <select wire:model="form.role_id" name="role_id" class="w-full border py-2 px-4 rounded-lg" required>
                             <option value="" disabled selected>Select a role</option>
                             @foreach ($roles as $role)
                             <option value="{{$role->id}}">

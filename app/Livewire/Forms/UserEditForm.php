@@ -43,7 +43,7 @@ class UserEditForm extends Form
         $this->address = $user->address;
         $this->phone = $user->phone;
         $this->gender = $user->gender;
-        $this->is_active = $user->is_active;
+        $this->is_active = $user->is_active === 1;
         $this->role_id = $user->role_id;    
     }
 

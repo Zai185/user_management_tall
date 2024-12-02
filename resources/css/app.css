@@ -32,4 +32,12 @@
     h1 {
         @apply text-4xl;
     }
+    table, fieldset{
+        @apply bg-white rounded shadow-lg  border border-gray-200 min-w-max;
+    }
+
+    table{
+        @apply w-full text-left table-auto;
+    }
+
 }

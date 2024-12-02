@@ -5,9 +5,11 @@
     @if (auth('web')->user()->hasPermission("units", 'create'))
     <x-button-link href="{{route('users.create')}}" class="">Create User</x-button-link>
     @endif
+
+
     @if($users->count())
     <div>
-        <table class="border border-gray-400 shadow-lg w-full text-left table-auto min-w-max">
+        <table>
             <thead>
                 <tr>
                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -51,18 +53,21 @@
                         </p>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50 w-48">
-                        @if (auth('web')->user()->hasPermission("units", 'edit' ))
-                        <a href="{{route('users.edit', ['user'=> $user->id])}}"
-                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                            Edit
-                        </a>
-                        @endif
-                        @if (auth('web')->user()->hasPermission("units", 'delete' ))
-                        <button @click="modalOpen = true;user_id='{{$user->id}}'; user_name=`{{$user->name}}`"
-                            class="btn_user_delete inline-block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                            Delete
-                        </button>
-                        @endif
+                        <x-icons.spinner wire:loading target="user_delete({{$user->id}})" />
+                        <div>
+                            @if (auth('web')->user()->hasPermission("users", 'edit' ))
+                            <a href="{{route('users.edit', ['user'=> $user->id])}}"
+                                class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                                Edit
+                            </a>
+                            @endif
+                            @if (auth('web')->user()->hasPermission("users", 'delete' ))
+                            <button @click="modalOpen = true;user_id='{{$user->id}}'; user_name=`{{$user->name}}`"
+                                class="btn_user_delete inline-block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                                Delete
+                            </button>
+                            @endif
+                        </div>
                     </td>
                 </tr>
                 @endforeach

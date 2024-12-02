@@ -66,15 +66,11 @@ class User extends Authenticatable
         $permission = Permission::where('permissions.name',  $permission_name)
             ->where('features.name', $feature_name)
             ->join('features', 'permissions.feature_id', "features.id")
+            ->select('permissions.id')
             ->first();
         if (!$permission) return false;
-        $p_id = $permission->id;
-
-
         return RolePermission::where('role_id', $this->role_id)
-            ->where('permission_id', $p_id)
+            ->where('permission_id', $permission->id)
             ->exists();
     }
-
-    
 }

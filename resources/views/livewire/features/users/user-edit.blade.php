@@ -5,7 +5,7 @@
         <p class="text-lg">Create User</p>
         <div>
             <div class="grid grid-cols-2 gap-4">
-                <fieldset class=" space-y-2 w-full border border-gray-800 px-2 mb-4 pb-2">
+                <fieldset class=" space-y-2 w-full border-gray-300 px-2 mb-4 pb-2">
                     <legend>Personal Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Name:</label>
@@ -33,24 +33,24 @@
                     </div>
 
                 </fieldset>
-                <fieldset class="space-y-2 w-full border border-gray-800 px-2 pb-2 mb-4">
+                <fieldset class=" space-y-2 w-full border-gray-300 px-2 mb-4 pb-2">
                     <legend>Account Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Email:</label>
-                        <x-input placeholder="john@example.com" wire:model="form.email" required />
+                        <x-input placeholder="john@example.com" type="email" wire:model="form.email" required />
                         <x-input-error error="form.email" />
                     </div>
 
                     <div>
                         <label class="text-sm font-medium block">Password:</label>
-                        <x-input placeholder="********" wire:model="form.password" required />
+                        <x-input placeholder="********" wire:model="form.password" />
                         <x-input-error error="form.password" />
 
                     </div>
 
                     <div>
-                        <label class="text-sm font-medium block">Role:</label>
-                        <select wire:model="form.role_id" name="role_id" class="w-full border py-2 px-4" required>
+                        <label class="text-sm font-medium block ">Role:</label>
+                        <select wire:model="form.role_id" name="role_id" class="w-full border py-2 px-4 rounded-lg" required>
                             <option value="" disabled selected>Select a role</option>
                             @foreach ($roles as $role)
                             <option value="{{$role->id}}">
@@ -65,18 +65,16 @@
                 </fieldset>
             </div>
         </div>
-        <div>
-            <input type="radio" wire:model="form.gender" name="gender" value="0">
-            <label>Male</label>
-            <input type="radio" wire:model="form.gender" name="gender" value="1">
-            <label>Female</label>
-            @error('form.gender')
-            <x-input-error :message="$message" />
-            @enderror
+        <div class="space-x-2">
+            <x-radio-group name="gender" text="male" value="0" wire:model="form.gender" />
+            <x-radio-group name="gender" text="female" value="1" wire:model="form.gender" />
+            <x-input-error error="form.gender" />
         </div>
 
-        <input type="checkbox" wire:model="form.is_active" name="is_active" {{$form->is_active ? 'checked' : ''}}>
+        <x-checkbox wire:model="form.is_active" />
         <label>Is Active</label>
+        <x-input-error error="form.is-active" />
+
     </div>
     <x-button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</x-button>
 </form>

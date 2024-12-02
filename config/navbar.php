@@ -3,7 +3,7 @@ return  [
 
 
     'dashboard' => [
-        'feature' => '',
+        'feature' => 'dashboard',
         'icon' => 'home',
         'links' => [
             [
@@ -21,12 +21,14 @@ return  [
             [
                 'href' => '/users',
                 'title' => 'user list',
-                'icon' => 'user'
+                'icon' => 'user',
+                'middleware' => ['users', 'view']
             ],
             [
                 'href' => '/users/create',
                 'title' => 'add user',
-                'icon' => 'plus-circle'
+                'icon' => 'plus-circle',
+                'middleware' => ['users','create']
             ],
         ]
     ],
@@ -38,12 +40,14 @@ return  [
             [
                 'href' => '/roles',
                 'title' => 'role list',
-                'icon' => 'user-circle'
+                'icon' => 'user-circle',
+                'middleware' => ['roles','view']
             ],
             [
                 'href' => '/roles/create',
                 'title' => 'add role',
-                'icon' => 'plus-circle'
+                'icon' => 'plus-circle',
+                'middleware' => ['roles','create']
             ],
         ]
     ],
@@ -55,12 +59,38 @@ return  [
             [
                 'href' => '/products',
                 'title' => 'product list',
-                'icon' => 'item'
+                'icon' => 'item',
+                'middleware' => ['products','view']
             ],
             [
                 'href' => '/products/create',
                 'title' => 'add product',
-                'icon' => 'plus-circle'
+                'icon' => 'plus-circle',
+                'middleware' => ['products','create']
+            ],
+            [
+                'href' => '/brands',
+                'title' => 'brand list',
+                'icon' => 'item',
+                'middleware' => ['brands','view']
+            ],
+            [
+                'href' => '/brands/create',
+                'title' => 'add brand',
+                'icon' => 'plus-circle',
+                'middleware' => ['brands','create']
+            ],
+            [
+                'href' => '/categories',
+                'title' => 'category list',
+                'icon' => 'item',
+                'middleware' => ['categories','view']
+            ],
+            [
+                'href' => '/categories/create',
+                'title' => 'add category',
+                'icon' => 'plus-circle',
+                'middleware' => ['categories','create']
             ],
         ]
     ],

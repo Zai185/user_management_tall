@@ -9,9 +9,7 @@
                     <label class="text-sm font-medium block">Name:</label>
                     <input type="text" placeholder="@name" wire:model="form.name" name="name" class="border w-full py-2 px-4" required>
                 </div>
-                @error('form.name')
-                <x-input-error :$message />
-                @enderror
+                <x-input-error error="form.name" />
             </div>
         </div>
         <x-button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</x-button>
