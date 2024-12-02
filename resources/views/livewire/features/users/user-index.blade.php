@@ -53,7 +53,7 @@
                         </p>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50 w-48">
-                        <x-icons.spinner wire:loading target="user_delete({{$user->id}})" />
+                        <!-- <x-icons.spinner wire:loading target="user_delete({{$user->id}})" /> -->
                         <div>
                             @if (auth('web')->user()->hasPermission("users", 'edit' ))
                             <a href="{{route('users.edit', ['user'=> $user->id])}}"

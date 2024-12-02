@@ -33,6 +33,7 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber,
             'address' => fake()->address,
             'gender' => rand(0,1),
+            'role_id' => 1,
             'is_active' => rand(0,1)
         ];
     }

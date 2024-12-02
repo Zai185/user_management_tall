@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1
         ]);
 
+        User::factory(10)->create();
+
         $features = ['users', 'roles', 'products', 'brands', 'categories', 'units'];
 
         $permissions = ['create', 'view', 'edit', 'delete'];
