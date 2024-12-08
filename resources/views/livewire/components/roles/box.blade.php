@@ -1,4 +1,4 @@
-<div x-data="{all: '{{$all}}', permissions: @entangle('permissions'), permissionLength: {{$feature->permissions->count()}}, feature: {{$feature}},...init()}" class="flex items-center gap-12 py-2 px-2 mb-2 even:bg-blue-50">
+<div x-data="{all: '{{$all}}', permissions: @entangle('permissions'), permissionLength: {{$feature->permissions->count()}}, feature: {{$feature}},...init()}" class="flex items-center gap-12 py-2 px-2 mb-2 {{$index % 2 == 0 ? '' : 'bg-blue-100'}}">
 
     <p class="capitalize w-20">{{$feature->name}}</p>
     <div class="flex items-center gap-2" x-data="">

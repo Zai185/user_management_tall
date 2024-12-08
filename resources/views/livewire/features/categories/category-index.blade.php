@@ -4,12 +4,12 @@
     <p class="text-lg">Category List</p>
 
     @if (auth('web')->user()->hasPermission("categories", 'create'))
-    <a href="{{route('categories.create')}}"  class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
+    <x-button-link href="{{route('categories.create')}}">
         Create Category
-    </a>
+    </x-button-link>
     @endif
 
-    @if($categories)
+    @if(count($categories)>0)
     <div>
         <table class="border border-gray-400 shadow-lg w-full text-left table-auto min-w-max">
             <thead>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 @foreach ($categories as $index => $category)
-                <tr>
+                <tr id="category-{{$category->id}}">
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                             {{(($categories->currentPage() - 1) * 10) + $index + 1}}
@@ -55,8 +55,8 @@
                     </td>
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("categories", 'edit' ))
-                        <a href="{{route('categories.edit', ['category'=> $category->id])}}"
-                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                        <a wire:navigate href="{{route('categories.edit', ['category'=> $category->id])}}"
+                            class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif
@@ -77,7 +77,6 @@
     </div>
     @else
 
-    {{json_encode($categories)}}
     <h2 class="text-3xl text-center">No category yet!</h2>
     @endif
     <x-modal feature="category" />

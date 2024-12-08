@@ -1,5 +1,5 @@
-<a
-    @click="isModelOpen = true;currentNav='{{$title}}'"
+<button
+    @click="isAsideOpen = true;localStorage.setItem('asideOpen', true);currentNav='{{$title}}'"
     {{$attributes->merge(
         ['class'=>"inline-flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-gray-100 text-gray-800 px-3 py-2 text-sm transition hover:bg-primary hover:text-primary-text",
     ]
@@ -14,4 +14,4 @@
         <p class="flex-1 font-medium capitalize">{{$title}}</p>
     </div>
 
-</a>
+</button>

@@ -17,9 +17,9 @@
 
 <body>
 
-    <div class="flex " x-data="{isModelOpen : false}">
+    <div class="flex " x-data="{isAsideOpen : false}" x-init="isAsideOpen =localStorage.getItem('asideOpen') || false">
         <livewire:components.sidebar />
-        <div class="bg-gray-50 flex-1 h-screen overflow-y-auto" @click="isModelOpen=false">
+        <div class="bg-gray-50 flex-1 h-screen overflow-y-auto" @click="isAsideOpen=false;localStorage.setItem('asideOpen', false);">
             {{$slot}}
         </div>
     </div>

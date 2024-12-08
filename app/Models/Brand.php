@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
+        'made_in'
     ];
 
     public function products(){

@@ -34,7 +34,7 @@ class ProductCreateForm extends Form
             "brand_id" => "required",
             "unit_id" => "required",
             "is_active" => "nullable",
-            "images" => "nullable|array",
+            "images" => "nullable|array|max:3",
             "images.*" => "nullable|image|max:5120"
         ];
     }
@@ -42,6 +42,7 @@ class ProductCreateForm extends Form
     public function submit()
     {
         $data = $this->validate();
+        $data['is_active'] = $data['is_active'] == 1;
         $product = Product::create($data);
         if ($this->images) {
             foreach ($this->images as $image) {

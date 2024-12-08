@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\Unit;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -24,8 +25,11 @@ class ProductCreate extends Component
     public function deleteImage($index)
     {
         unset($this->form->images[$index]);
+        // $this->form->images = array_values($this->form->images);
+        $this->dispatch("image-deleted");
     }
 
+    #[On("image-deleted")]
     public function render()
     {
 

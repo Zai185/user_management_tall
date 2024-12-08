@@ -1,4 +1,4 @@
-<form wire:submit="update" class="py-2 px-4 flex-1">
+<form wire:submit="save" class="py-2 px-4 flex-1">
     @csrf
     <h2 class="text-2xl font-medium">Products</h2>
     <div>
@@ -88,21 +88,40 @@
         type="file"
         multiple
         accept="image/*"
-        wire:model="form.images"
+        wire:model="form.new_images"
         class="block w-full mb-4" />
 
     <div id="img-box" class="flex gap-1"></div>
     <p>Photo Preview:</p>
-    <x-icons.spinner wire:loading wire:target='form.images'></x-icons.spinner>
-    @if ($form->images)
+    <x-icons.spinner wire:loading wire:target='form.new_images'></x-icons.spinner>
 
-    <div class="mb-4 flex gap-1">
-        @foreach ($form->images as $image)
-        <img src="{{$image->img_path }}" alt="Preview" class="size-32 border border-gray-800 rounded">
+
+    <div class="mb-4 flex gap-4">
+
+        @if ($form->images)
+        @foreach ($form->images as $index => $image)
+        <div x-ref="image_{{$index}}"  id="image_{{$index}}" class="size-32 relative">
+            <img src="{{ $image->img_path }}" alt="Preview" class="w-full h-full border border-gray-800 rounded">
+            <span wire:click="deleteImage({{$index}});$refs.image_{{$index}}.remove()" class="absolute text-white bg-red-700 cursor-pointer hover:bg-red-800 border top-0 right-0 translate-x-1/2 rounded-lg p-1 -translate-y-1/2 [&>svg]:h-4 [&>svg]:w-4">
+                <x-icons.trash />
+            </span>
+        </div>
         @endforeach
-    </div>
+        @endif
 
-    @endif
+        @if ($form->new_images)
+        @foreach ($form->new_images as $index=>$image)
+        <div x-ref="new_image_{{$index}}" id="new_image_{{$index}}" class="size-32 relative">
+            <img src="{{ $image->temporaryUrl() }}" alt="Preview" class="w-full h-full border border-gray-800 rounded">
+            <span wire:click="deleteNewImage({{$index}});$refs.new_image_{{$index}}.remove()" class="absolute text-white bg-red-700 cursor-pointer hover:bg-red-800 border top-0 right-0 translate-x-1/2 rounded-lg p-1 -translate-y-1/2 [&>svg]:h-4 [&>svg]:w-4">
+                <x-icons.trash />
+            </span>
+        </div>
+        @endforeach
+        @endif
+        
+    </div>
+    <x-input-error error="max-images" />
 
     <x-button type="submit">submit</x-button>
 </form>

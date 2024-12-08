@@ -37,13 +37,13 @@
                     <legend>Account Information</legend>
                     <div>
                         <label class="text-sm font-medium block">Email:</label>
-                        <x-input placeholder="john@example.com" type="email" wire:model="form.email" required />
+                        <x-input disabled placeholder="john@example.com" type="email" wire:model="form.email" required />
                         <x-input-error error="form.email" />
                     </div>
 
                     <div>
                         <label class="text-sm font-medium block">Password:</label>
-                        <x-input placeholder="********" wire:model="form.password" />
+                        <x-input type="password" placeholder="********" wire:model="form.password" />
                         <x-input-error error="form.password" />
 
                     </div>

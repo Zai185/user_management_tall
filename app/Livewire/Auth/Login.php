@@ -38,10 +38,10 @@ class Login extends Component
         }
 
         Session::regenerate();
-        $this->redirectRoute('dashboard', navigate:true);
+        $this->redirectRoute('dashboard', navigate: true);
     }
 
-  
+
     #[Layout('layouts.guest')]
     public function render()
     {

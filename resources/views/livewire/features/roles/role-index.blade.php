@@ -4,12 +4,9 @@
 
     @if (auth('web')->user()->hasPermission("roles", 'create'))
 
-    <x-button>
-        <a href="{{route('roles.create')}}" >
-            Create Role
-        </a>
-    </x-button>
-
+    <x-button-link href="{{route('roles.create')}}">
+        Create Role
+    </x-button-link>
     @endif
 
     @if($roles->count())
@@ -34,7 +31,7 @@
         </thead>
         <tbody>
             @foreach ($roles as $index => $role)
-            <tr>
+            <tr id="role-{{ $role->id }}">
                 <td class="p-4 border-b border-blue-gray-50">
                     <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                         {{(($roles->currentPage() - 1) * 10) + $index + 1}}
@@ -48,7 +45,7 @@
                 </td>
                 <td class="p-4 border-b border-blue-gray-50 w-48">
                     @if (auth('web')->user()->hasPermission("roles", 'edit' ))
-                    <a href="{{route('roles.edit', ['role'=> $role->id])}}"  class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                    <a wire:navigate href="{{route('roles.edit', ['role'=> $role->id])}}" class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                         Edit
                     </a>
                     @endif

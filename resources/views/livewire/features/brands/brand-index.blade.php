@@ -4,9 +4,9 @@
     <p class="text-lg">Brand List</p>
 
     @if (auth('web')->user()->hasPermission("brands", 'create'))
-    <a href="{{route('brands.create')}}"  class="py-1 px-4 border rounded bg-blue-700 hover:bg-blue-900 ml-auto text-white block w-fit cursor-pointer">
+    <x-button-link href="{{route('brands.create')}}">
         Create Brand
-    </a>
+    </x-button-link>
     @endif
     @if($brands->count())
     <div>
@@ -21,6 +21,11 @@
                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                             Name
+                        </p>
+                    </th>
+                    <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                        <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                            Country
                         </p>
                     </th>
                     <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -41,11 +46,16 @@
                             {{$brand->name}}
                         </p>
                     </td>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                            {{$brand->made_in}}
+                        </p>
+                    </td>
 
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("brands", 'edit' ))
-                        <a href="{{route('brands.edit', ['brand'=> $brand->id])}}"
-                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                        <a wire:navigate href="{{route('brands.edit', ['brand'=> $brand->id])}}"
+                            class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif

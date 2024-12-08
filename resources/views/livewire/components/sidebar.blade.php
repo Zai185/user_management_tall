@@ -1,4 +1,5 @@
-<div class="flex relative " x-data="{currentNav: @entangle('currentNav'), navmenus: $wire.get('navmenus')}">
+<div class="flex relative" x-data="{currentNav: $wire.get('currentNav'), navmenus: $wire.get('navmenus') }">
+
 
     <aside
         class=" h-screen flex flex-col gap-2 finset-y-0 left-0 z-40 w-52 space-y-2 overflow-y-auto border-r border-main-border bg-surface px-3 pb-4 pt-2 shadow-sm">
@@ -12,27 +13,42 @@
             @foreach ($navmenus as $navname => $navmenu)
             @if (auth()->user()->hasPermission($navmenu['feature'], 'view'))
             <x-sidebar-button
-                wire:click="update"
+                x-bind:class="currentNav == '{{$navname}}' ? 'bg-primary text-primary-text' : ''"
+                @click="currentNav = {{$navname}}"
                 icon="{{$navmenu['icon']}}"
                 title="{{$navname}}" />
+
             @endif
             @endforeach
             <div class="flex-1"></div>
         </ul>
+
         <div class="flex-1"></div>
         <x-button wire:click="logout">Log out</x-button>
     </aside>
 
-    <ul wire:loading.class="opacity-0" wire:target="update" wire:transition :class="isModelOpen ? 'min-w-52 px-4': 'min-w-0 px-0'"
-        class="origin-left  w-0 inset-y-0 z-40 space-y-2 py-4 overflow-y-auto border-r border-main-border bg-surface transition-all shadow-sm">
+    <ul wire:loading.class="opacity-0" wire:target="update" wire:transition :class="isAsideOpen ? 'min-w-52 px-4': 'min-w-0 px-0'"
+        class="origin-left !block w-0 inset-y-0 z-40 space-y-2 py-4 overflow-y-auto border-r border-main-border bg-surface transition-all shadow-sm">
 
-        @if (isset($currentNav))
-        @foreach ( $navmenus[$currentNav]['links'] as $nav )
-        @if (!isset($nav['middleware']) || auth()->user()->hasPermission(...$nav['middleware']))
-        <x-sidebar-sub-element :$nav />
-        @endif
-        @endforeach
-        @endif
+
+        
+        <template x-if="navmenus[currentNav]">
+            
+            <template x-for="(nav,index) in navmenus[currentNav]['links']" :key="index">
+                
+                <div class="flex items-center hover:text-primary gap-2" x-data="{icon :nav.icon}" x-bind:class="nav.href === '/{{request()->route()->uri()}}' ? 'text-blue-800': ''">
+                    <span class="flex size-6 flex-shrink-0 items-center justify-center [&>svg]:h-5 [&>svg]:w-5">
+                        @foreach ($icons as $icon)
+                        <template x-if="icon == '{{$icon}}'">
+                            @includeIf("components.icons.$icon")
+                        </template>
+                        @endforeach
+                    </span>
+                    <a wire:navigate :href="nav.href" class="cursor-pointer capitalize" wire:current="bg-red-800" x-text="nav.title"></a>
+
+                </div>
+            </template>
+        </template>
     </ul>
 
 </div>

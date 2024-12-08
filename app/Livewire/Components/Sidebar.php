@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Models\Feature;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -10,15 +11,9 @@ use Livewire\Component;
 class Sidebar extends Component
 {
 
+    public $currentNav;
     public $navmenus;
-    public string $currentNav;
-
-    public function update()
-    {
-
-        // $this->currentNav = $navname;
-        $this->dispatch('update_sidebar');
-    }
+    public $icons;
     public function logout()
     {
         auth('web')->logout();
@@ -27,14 +22,23 @@ class Sidebar extends Component
         $this->redirectRoute('login', navigate: true);
     }
 
-    public function mount()
+    public function getIcon($icon)
     {
-        $this->navmenus = config('navbar');
+
+        return view("components.icons.tag");
     }
 
-    #[On('update_sidebar')]
+    public function mount()
+    {
+        $this->currentNav = trim(request()->route()->getPrefix(), 
+        "/");
+        $this->navmenus = config('navbar.navmenus');
+        $this->icons = config('navbar.icons');
+    }
+
     public function render()
     {
+
         return view(
             'livewire.components.sidebar',
             [

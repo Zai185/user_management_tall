@@ -94,19 +94,21 @@
     <div id="img-box" class="flex gap-1"></div>
     <p>Photo Preview:</p>
     <x-icons.spinner wire:loading wire:target='form.images'></x-icons.spinner>
-    @if ($form->images)
 
-    <div class="mb-4 flex gap-1">
-        @foreach ($form->images as $index => $image)
-        <div class="size-32 relative">
-            <img src="{{ $image->temporaryUrl() }}" alt="Preview" class="w-full h-full border border-gray-800 rounded">
-            <span wire:click="deleteImage({{$index}})" class="absolute text-white bg-red-700 cursor-pointer hover:bg-red-800 border top-0 right-0 translate-x-1/2 rounded-lg p-1 -translate-y-1/2 [&>svg]:h-4 [&>svg]:w-4">
+
+    @if ($form->images)
+    <div class="mb-4 flex gap-4">
+
+        @foreach ($form->images as $index=>$i)
+        <div x-ref="image_{{$index}}" id="image-{{$index}}" class="size-32 relative">
+            <img src="{{$i->temporaryUrl()}}" />
+            <span wire:loading.remove wire:click="deleteImage({{$index}});$refs.image_{{$index}}.remove()" class="absolute text-white bg-red-700 cursor-pointer hover:bg-red-800 border top-0 right-0 translate-x-1/2 rounded-lg p-1 -translate-y-1/2 [&>svg]:h-4 [&>svg]:w-4">
                 <x-icons.trash />
             </span>
         </div>
         @endforeach
     </div>
-
+    <x-input-error error="form.images"/>
     @endif
 
     <x-button type="submit">submit</x-button>

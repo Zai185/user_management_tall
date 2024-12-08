@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    
+
     public function run(): void
     {
         $role = Role::create([
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1
         ]);
 
-        User::factory(10)->create();
+        User::factory(20)->create();
 
         $features = ['users', 'roles', 'products', 'brands', 'categories', 'units'];
 
@@ -49,8 +49,13 @@ class DatabaseSeeder extends Seeder
                 ]);
                 $role->permissions()->attach($p->id);
             }
-
         }
+        $dashboard_feature = Feature::create(['name' => 'dashboard']);
+        $p = Permission::create([
+            'name' => 'view',
+            'feature_id' => $dashboard_feature->id
+        ]);
+        $role->permissions()->attach($p->id);
 
         Category::create([
             'name' => "Phone"
@@ -73,6 +78,5 @@ class DatabaseSeeder extends Seeder
         }
 
         Product::factory(10)->create();
-
     }
 }

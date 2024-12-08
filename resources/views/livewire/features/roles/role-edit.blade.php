@@ -2,18 +2,17 @@
     @csrf
     <h2>Roles</h2>
 
-    <div class="flex items-center gap-4">
-        <label>Role name:</label>
-        <x-input  placeholder="Role Name" wire:model="form.role" required />
+    <div>
+        <x-input placeholder="Role Name" wire:model="form.role" class="!w-56" required />
+        <x-input-error error="form.role" />
     </div>
-    <x-input-error error="form.role" />
 
     <div class="odd:bg-blue-500">
         @foreach ($features as $feature)
         <livewire:components.roles.box
             :key="$feature->id"
             :$feature
-            
+
             wire:model="form.permissions" />
         @endforeach
         <x-input-error error="form.permissions" />

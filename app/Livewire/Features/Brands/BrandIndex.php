@@ -13,10 +13,11 @@ class BrandIndex extends Component
     }
     public function render()
     {
+        $brands = Brand::paginate(10);
         return view(
             'livewire.features.brands.brand-index',
             [
-                'brands' => Brand::paginate(10)
+                'brands' => $brands
             ]
         );
     }

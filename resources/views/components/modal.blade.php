@@ -1,6 +1,6 @@
 @props(['feature'])
 
-<div class="relative z-10 opacity-0" :class="{'opacity-0 pointer-events-none' : !modalOpen}" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div class="relative z-[9999] opacity-0" :class="{'opacity-0 pointer-events-none' : !modalOpen}" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="fixed inset-0 bg-gray-500/75 transition-opacity" @click="modalOpen = false" aria-hidden="true"></div>
 
     <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  overflow-y-auto">

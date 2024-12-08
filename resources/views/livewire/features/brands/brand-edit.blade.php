@@ -7,11 +7,14 @@
             <div class="grid grid-cols-2 gap-4 w-2/3">
                 <div class="w-full">
                     <label class="text-sm font-medium block">Name:</label>
-                    <input type="text" placeholder="@name" wire:model="form.name" name="name" class="border w-full py-2 px-4" required>
+                    <x-input placeholder="Brand Name" wire:model="form.name" required />
+                    <x-input-error error="form.name" />
                 </div>
-                @error('form.name')
-                <x-input-error :$message />
-                @enderror
+                <div class="w-full">
+                    <label class="text-sm font-medium block">Country:</label>
+                    <x-input placeholder="Brand Country" wire:model="form.made_in" required />
+                    <x-input-error error="form.made_in" />
+                </div>
             </div>
         </div>
         <x-button type="submit" class="py-1 rounded-lg px-4 border bg-blue-700 text-white hover:bg-blue-900">submit</x-button>

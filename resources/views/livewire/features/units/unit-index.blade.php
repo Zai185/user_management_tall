@@ -30,7 +30,7 @@
             </thead>
             <tbody>
                 @foreach ($units as $index => $unit)
-                <tr>
+                <tr id="unit-{{$unit->id}}">
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                             {{(($units->currentPage() - 1) * 10) + $index + 1}}

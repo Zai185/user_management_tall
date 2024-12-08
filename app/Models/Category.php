@@ -25,7 +25,9 @@ class Category extends Model
     {
         if ($this->category_id) {
             $parent = $this->parent;
-            return $parent->parent_path . " > " . $this->name;
+            if($parent){
+                return $parent->parent_path . " > " . $this->name;
+            }
         }
         return $this->name;
     }

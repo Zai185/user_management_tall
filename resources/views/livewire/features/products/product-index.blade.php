@@ -2,12 +2,12 @@
     class="relative  w-full h-full overflow-y-auto  text-gray-700 bg-white shadow-md rounded-xl bg-clip-border p-4">
     <h2 class="text-2xl font-medium">Products</h2>
     <p class="text-lg">Product List</p>
-
     @if (auth('web')->user()->hasPermission("products", 'create'))
-    <x-button-link href="{{route('products.create')}}" >
+    <x-button-link href="{{route('products.create')}}">
         Create Product
     </x-button-link>
     @endif
+
     @if($products->count())
     <div>
         <table class="border border-gray-400 shadow-lg w-full text-left table-auto min-w-max">
@@ -50,7 +50,7 @@
             </thead>
             <tbody>
                 @foreach ($products as $index => $product)
-                <tr>
+                <tr id="product-{{ $product->id }}">
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                             {{(($products->currentPage() - 1) * 10) + $index + 1}}
@@ -59,7 +59,6 @@
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                             {{$product->name}}
-
                         </p>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50">
@@ -76,20 +75,19 @@
                     </td>
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                            {{$product->category->name}}
+                            {{$product->category ? $product->category->name : "-"}}
 
                         </p>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                            {{$product->brand->name}}
-
+                            {{$product->brand ? $product->brand->name: 'unknown'}}
                         </p>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50 w-48">
                         @if (auth('web')->user()->hasPermission("products", 'edit' ))
-                        <a href="{{route('products.edit', ['product'=> $product->id])}}"
-                             class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                        <a wire:navigate href="{{route('products.edit', ['product'=> $product->id])}}"
+                            class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                             Edit
                         </a>
                         @endif

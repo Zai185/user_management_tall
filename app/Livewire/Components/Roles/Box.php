@@ -12,6 +12,7 @@ class Box extends Component
     #[Modelable()]
     public $permissions;
     public $feature;
+    public $index;
     public bool $all;
 
     // public function togglePermissions()

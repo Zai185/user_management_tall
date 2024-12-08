@@ -32,9 +32,9 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 @foreach ($users as $index => $user)
-                <tr>
+                <tr id="user-{{ $user->id }}">
                     <td class="p-4 border-b border-blue-gray-50">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                             {{(($users->currentPage() - 1) * 10) + $index + 1}}
@@ -53,16 +53,15 @@
                         </p>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50 w-48">
-                        <!-- <x-icons.spinner wire:loading target="user_delete({{$user->id}})" /> -->
                         <div>
                             @if (auth('web')->user()->hasPermission("users", 'edit' ))
-                            <a href="{{route('users.edit', ['user'=> $user->id])}}"
+                            <a wire:navigate href="{{route('users.edit', ['user'=> $user->id])}}"
                                 class="inline-block mx-2 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                                 Edit
                             </a>
                             @endif
                             @if (auth('web')->user()->hasPermission("users", 'delete' ))
-                            <button @click="modalOpen = true;user_id='{{$user->id}}'; user_name=`{{$user->name}}`"
+                            <button @click="modalOpen = true;user_id='{{$user->id}}'; user_name=`{{$user->name}}`;"
                                 class="btn_user_delete inline-block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                                 Delete
                             </button>
